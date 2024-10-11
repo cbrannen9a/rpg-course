@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5qt8n6cklgre"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_djy62"]
+[ext_resource type="Texture2D" uid="uid://csl6gxu6iu0i1" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0085.png" id="1_y52yg"]
+[ext_resource type="Texture2D" uid="uid://dwgiknhalj5pm" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0104.png" id="3_7gvos"]
+[ext_resource type="Texture2D" uid="uid://cymvme8dqaqcl" path="res://assets/kenney_tiny-town/Tiles/tile_0118.png" id="3_tvu87"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o6hwp"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_74h42"]
+size = Vector2(16, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2t1q"]
+bg_color = Color(1, 0.337255, 0.313726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bpufl"]
+bg_color = Color(0.0235294, 0.729412, 0, 1)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_djy62")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_o6hwp")
+
+[node name="Tile0085" type="Sprite2D" parent="."]
+texture = ExtResource("1_y52yg")
+
+[node name="Weapons" type="Marker2D" parent="."]
+
+[node name="Ranged" type="Marker2D" parent="Weapons"]
+
+[node name="Tile0118" type="Sprite2D" parent="Weapons/Ranged"]
+position = Vector2(13, 0)
+texture = ExtResource("3_tvu87")
+
+[node name="Timer" type="Timer" parent="Weapons/Ranged"]
+wait_time = 0.5
+
+[node name="Melee" type="Area2D" parent="Weapons"]
+visible = false
+
+[node name="Tile0104" type="Sprite2D" parent="Weapons/Melee"]
+position = Vector2(17, 1)
+rotation = 1.56483
+texture = ExtResource("3_7gvos")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapons/Melee"]
+position = Vector2(17, 1)
+shape = SubResource("RectangleShape2D_74h42")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -12.0
+offset_top = -13.0
+offset_right = 11.0
+offset_bottom = -11.0
+theme_override_styles/background = SubResource("StyleBoxFlat_h2t1q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bpufl")
+value = 50.0
+show_percentage = false
+
+[connection signal="timeout" from="Weapons/Ranged/Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Weapons/Melee" to="." method="_on_melee_body_entered"]
