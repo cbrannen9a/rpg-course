@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://bf3pfuxd4d1bi"]
+[gd_scene load_steps=2 format=3 uid="uid://bf3pfuxd4d1bi"]
+
+[ext_resource type="PackedScene" uid="uid://dn11n88u5wc4u" path="res://scenes/inventory/inventory.tscn" id="1_5kgik"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="inventory" parent="." instance=ExtResource("1_5kgik")]
+offset_left = 983.0
+offset_top = 499.0
+offset_right = 1061.0
+offset_bottom = 578.0

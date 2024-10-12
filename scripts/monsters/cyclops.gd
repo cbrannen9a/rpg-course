@@ -8,7 +8,7 @@ var speed: float = 800.0
 var health: int = 5
 var player_buffer: int = 30
 var state: Global.state_types = Global.state_types.ACTIVE
-var direction: Vector2 
+var direction: Vector2
 var damage: int = 1
 
 func _ready() -> void:
@@ -20,7 +20,7 @@ func _physics_process(delta: float) -> void:
 	if is_instance_valid(player) and Global.move_state_types.has(state):
 		direction = (player.global_position - self.global_position).normalized()
 		if position.distance_to(player.position) > player_buffer:
-			self.velocity = direction*speed*delta
+			self.velocity = direction * speed * delta
 		else:
 			self.velocity = Vector2.ZERO
 			
@@ -30,8 +30,8 @@ func _physics_process(delta: float) -> void:
 			sprite.flip_h = false
 		move_and_slide()
 
-func hit(damage: int):
-	health -= damage
+func hit(hit_damage: int):
+	health -= hit_damage
 	if health <= 0:
 		state = Global.state_types.DYING
 		get_node("AnimationPlayer").play("death")

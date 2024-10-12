@@ -11,12 +11,16 @@ var state: Global.state_types = Global.state_types.ACTIVE
 var health: int = 5
 var damage: int = 2
 var attack_speed: float = 0.1
+var maxHealth: int
 
 func _ready() -> void:
 	hp_bar.max_value = health
+	maxHealth = health
 	
 func _physics_process(delta: float) -> void:
-	
+	weapon_management()
+	if health > maxHealth:
+		health = maxHealth
 	if Global.move_state_types.has(state):
 		weapon_marker.look_at(get_global_mouse_position())
 		attack_check(delta)
@@ -31,7 +35,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_melee_body_entered(body: Node2D) -> void:
 	if state == Global.state_types.MELEE and body.is_in_group("monster"):
-		body.hit(damage)
+		body.hit(Global.item_equipped.item_damage)
 		
 
 func attack_check(delta: float):
@@ -57,7 +61,7 @@ func ranged_attack(target_pos):
 	arrow_temp.direction = target_pos
 	arrow_temp.look_at(target_pos)
 	arrow_temp.owner_name = "player"
-	arrow_temp.damage = self.damage
+	arrow_temp.damage = Global.item_equipped.item_damage
 	arrow_temp.global_position = self.global_position
 	get_node("../Projectiles").add_child(arrow_temp)
 	
@@ -73,9 +77,24 @@ func return_default():
 func _on_timer_timeout() -> void:
 	state = Global.state_types.ACTIVE
 
-func hit(damage: int):
-	health -= damage
+func hit(hit_damage: int):
+	health -= hit_damage
 	hp_bar.value = health
 	if health <= 0:
 		state = Global.state_types.DYING
 		get_node("../game_over").game_over()
+
+func weapon_management():
+	if Global.item_equipped:
+		match Global.item_equipped.type:
+			ItemData.Type.MELEE:
+				melee_weapon.show()
+				ranged_weapon.hide()
+				melee_weapon.get_node("Tile0104").texture = Global.item_equipped.item_texture
+			ItemData.Type.RANGED:
+				melee_weapon.hide()
+				ranged_weapon.show()
+				ranged_weapon.get_node("Tile0118").texture = Global.item_equipped.item_texture
+			_:
+				melee_weapon.hide()
+				ranged_weapon.hide()
