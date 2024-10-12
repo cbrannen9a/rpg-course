@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bdmak6ovnsa7k"]
+
+[ext_resource type="Texture2D" uid="uid://bpw2wisiyakvc" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0103.png" id="1_hvdol"]
+[ext_resource type="Script" path="res://scripts/levels/item_data.gd" id="2_00dcc"]
+
+[resource]
+script = ExtResource("2_00dcc")
+type = 0
+item_name = "Dagger"
+item_damage = 4
+item_health = 0
+item_defense = 0
+stackable = false
+description = "This is a dagger"
+item_texture = ExtResource("1_hvdol")

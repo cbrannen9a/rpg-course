@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://dilu7usbu74r"]
+[gd_scene load_steps=10 format=4 uid="uid://dilu7usbu74r"]
 
 [ext_resource type="Texture2D" uid="uid://cifdbv0idbre1" path="res://assets/kenney_tiny-town/Tilemap/tilemap_packed.png" id="1_hemj6"]
 [ext_resource type="PackedScene" uid="uid://c5qt8n6cklgre" path="res://scenes/player.tscn" id="2_alsov"]
 [ext_resource type="PackedScene" uid="uid://bng88ndf0w7ro" path="res://scenes/cyclops.tscn" id="3_0unsh"]
 [ext_resource type="PackedScene" uid="uid://c0fh2d5yoscvx" path="res://scenes/levels/game_over.tscn" id="4_mgu6w"]
+[ext_resource type="PackedScene" uid="uid://bf3pfuxd4d1bi" path="res://scenes/levels/gui.tscn" id="5_fsq47"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4etll"]
 texture = ExtResource("1_hemj6")
@@ -433,3 +434,5 @@ position = Vector2(48, 34)
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="game_over" parent="." instance=ExtResource("4_mgu6w")]
+
+[node name="gui" parent="." instance=ExtResource("5_fsq47")]

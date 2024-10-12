@@ -7,7 +7,7 @@ var player: CharacterBody2D
 var speed: float = 800.0
 var health: int = 5
 var player_buffer: int = 30
-var state = Global.state_types.ACTIVE
+var state: Global.state_types = Global.state_types.ACTIVE
 var direction: Vector2 
 var damage: int = 1
 
