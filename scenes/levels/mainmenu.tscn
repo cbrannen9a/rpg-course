@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://hdet2g0vpq7x"]
+
+[ext_resource type="Script" path="res://scripts/levels/mainmenu.gd" id="1_rd8vs"]
+
+[node name="mainmenu" type="Node"]
+script = ExtResource("1_rd8vs")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 8.0
+offset_top = 2.0
+offset_right = 1153.0
+offset_bottom = 643.0
+
+[node name="play" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.085
+anchor_bottom = 0.148
+offset_left = 506.0
+offset_top = 279.0
+offset_right = 631.675
+offset_bottom = 343.132
+theme_override_font_sizes/font_size = 24
+text = "Play"
+
+[connection signal="pressed" from="Panel/play" to="." method="_on_play_pressed"]

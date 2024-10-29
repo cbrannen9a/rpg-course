@@ -10,11 +10,23 @@ size = Vector2(20.0147, 7.84925)
 script = ExtResource("1_oreym")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_ify7t")
 
 [node name="Tile0119" type="Sprite2D" parent="."]
 rotation = 0.785398
 texture = ExtResource("2_udcjt")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(0.377691, 0.109991, 0.00993436, 0.811765)
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 0.8
+randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]

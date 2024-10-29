@@ -48,6 +48,7 @@ func attack_check(delta: float):
 
 	
 func melee_attack(target_pos):
+	get_node("hit").play()
 	state = Global.state_types.MELEE
 	var tween = create_tween()
 	
@@ -55,6 +56,7 @@ func melee_attack(target_pos):
 	tween.tween_callback(return_default)
 	
 func ranged_attack(target_pos):
+	get_node("shoot").play()
 	get_node("Weapons/Ranged/Timer").start()
 	state = Global.state_types.RANGED
 	var arrow_temp = arrow_scene.instantiate()
@@ -78,6 +80,7 @@ func _on_timer_timeout() -> void:
 	state = Global.state_types.ACTIVE
 
 func hit(hit_damage: int):
+	get_node("damage").play()
 	health -= hit_damage
 	hp_bar.value = health
 	if health <= 0:

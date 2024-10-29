@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cy5i4c1f4nxqn"]
+
+[ext_resource type="Script" path="res://scripts/inventory/item_object.gd" id="1_nb6t2"]
+[ext_resource type="Texture2D" uid="uid://cymvme8dqaqcl" path="res://assets/kenney_tiny-town/Tiles/tile_0118.png" id="1_vilxu"]
+[ext_resource type="AudioStream" uid="uid://so2eu1a5w0n1" path="res://assets/pickup.ogg" id="3_jmy4d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bjflq"]
+radius = 8.0
+
+[node name="item_object" type="Area2D"]
+script = ExtResource("1_nb6t2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bjflq")
+
+[node name="Tile0118" type="Sprite2D" parent="."]
+texture = ExtResource("1_vilxu")
+
+[node name="pickup" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_jmy4d")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="pickup" to="." method="_on_pickup_finished"]

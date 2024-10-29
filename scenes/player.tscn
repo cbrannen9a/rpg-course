@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5qt8n6cklgre"]
+[gd_scene load_steps=12 format=3 uid="uid://c5qt8n6cklgre"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_djy62"]
 [ext_resource type="Texture2D" uid="uid://csl6gxu6iu0i1" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0085.png" id="1_y52yg"]
 [ext_resource type="Texture2D" uid="uid://dwgiknhalj5pm" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0104.png" id="3_7gvos"]
 [ext_resource type="Texture2D" uid="uid://cymvme8dqaqcl" path="res://assets/kenney_tiny-town/Tiles/tile_0118.png" id="3_tvu87"]
+[ext_resource type="AudioStream" uid="uid://cddp1fc7fxjei" path="res://assets/sword hit.ogg" id="5_5q63n"]
+[ext_resource type="AudioStream" uid="uid://estoa3albb83" path="res://assets/damage.ogg" id="6_80l6w"]
+[ext_resource type="AudioStream" uid="uid://cpo103gjg1n5c" path="res://assets/arrow shoot.ogg" id="7_8acrk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o6hwp"]
 radius = 6.0
@@ -59,6 +62,15 @@ theme_override_styles/background = SubResource("StyleBoxFlat_h2t1q")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bpufl")
 value = 50.0
 show_percentage = false
+
+[node name="hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_5q63n")
+
+[node name="damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_80l6w")
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_8acrk")
 
 [connection signal="timeout" from="Weapons/Ranged/Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Weapons/Melee" to="." method="_on_melee_body_entered"]

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var arrow_scene: PackedScene = preload("res://scenes/projectiles/arrow.tscn")
+@onready var item_scene: PackedScene = preload("res://scenes/inventory/item_object.tscn")
 @onready var sprite = get_node("Tile0109")
 @onready var hp_bar = get_node("ProgressBar")
 var player: CharacterBody2D
@@ -36,7 +37,12 @@ func hit(hit_damage: int):
 		state = Global.state_types.DYING
 		get_node("AnimationPlayer").play("death")
 		await get_node("AnimationPlayer").animation_finished
-		
+		var rng: int = randi_range(2, 5)
+		for i in range(rng):
+			var item_temp = item_scene.instantiate()
+			item_temp.global_position = self.position
+			get_node("../objects").add_child(item_temp)
+
 		self.queue_free()
 		
 func ranged_attack(target_pos):

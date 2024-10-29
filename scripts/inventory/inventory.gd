@@ -9,6 +9,7 @@ var items_to_load: Array = [
 
 @export var inventory_size: int = 9
 @onready var grid = get_node("Grid")
+
 func _ready() -> void:
   for i in inventory_size:
     var slot = InventorySlot.new()
